@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Team Form{% endblock %}
+
+{% block content %}
+<h2>{% if team %}Edit Team{% else %}Add Team{% endif %}</h2>
+<form action="{% if team %}{{ url_for('main.update_team', id=team.id) }}{% else %}{{ url_for('main.add_team') }}{% endif %}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{% if team %}{{ team.name }}{% endif %}" required>
+    <label for="confederation">Confederation:</label>
+    <input type="text" id="confederation" name="confederation" value="{% if team %}{{ team.confederation }}{% endif %}" required>
+    <label for="badge_url">Badge URL:</label>
+    <input type="url" id="badge_url" name="badge_url" value="{% if team %}{{ team.badge_url }}{% endif %}" required>
+    <button type="submit">{% if team %}Update{% else %}Add{% endif %}</button>
+</form>
+{% endblock %}

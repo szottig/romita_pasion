@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Teams{% endblock %}
+
+{% block content %}
+<h2>Teams</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Confederation</th>
+            <th>Badge</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for team in teams %}
+        <tr>
+            <td>{{ team.name }}</td>
+            <td>{{ team.confederation }}</td>
+            <td><img src="{{ team.badge_url }}" alt="{{ team.name }} badge" width="50"></td>
+            <td>
+                <a href="{{ url_for('main.get_team', id=team.id) }}">View</a>
+                <a href="{{ url_for('main.update_team', id=team.id) }}">Edit</a>
+                <form action="{{ url_for('main.delete_team', id=team.id) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
